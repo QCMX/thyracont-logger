@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os, time, argparse, serial
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from matplotlib.dates import num2date
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
@@ -73,7 +73,8 @@ def main():
             # update upper xlim if current upper xlim > old data
             low, up = ax.get_xlim()
             if len(timing) <= 2:
-                ax.set_xlim(timing[0], timing[-1])
+                ax.set_xlim(timing[0]-timedelta(seconds=args.interval),
+                            timing[-1])
             else:
                 if num2date(up) >= timing[-2]:
                     up = timing[-1]
