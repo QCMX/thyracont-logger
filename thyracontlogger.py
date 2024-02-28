@@ -30,7 +30,7 @@ def main():
                         dest='interval', default=DEFAULT_INTERVAL)
     args = parser.parse_args()
     
-    logabspath = os.path.abspath(args.LOGFILE)
+    logabspath = os.path.abspath(os.path.expanduser(args.LOGFILE))
 
     ser = serial.Serial(args.COMPORT, args.baudrate)
     sensor = ThyracontReader(ser)
